@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Login</h2>
+    
+    <!-- Messaggi flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('routes.login') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-input" required autocomplete="email" placeholder="Inserisci la tua email">
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-input" required autocomplete="current-password" placeholder="Inserisci la tua password">
+            <div style="margin-top: 10px;">
+                <input type="checkbox" id="togglePassword">
+                <label for="togglePassword">Mostra password</label>
+            </div>
+        </div>
+        
+        <div class="form-button-container">
+            <button type="submit" class="form-button" title="Effettua il login">Accedi</button>
+            <button type="submit" name="resend_confirmation" value="true" class="form-button secondary">
+                Reinvia conferma
+            </button>
+        </div>
+    </form>
+    
+    <p>Password dimenticata? <a href="{{ url_for('routes.password_dimenticata') }}">Reset Password</a></p>
+    <p>Non hai un account? <a href="{{ url_for('routes.register') }}">Registrati</a></p>
+</div>
+
+<script>
+    // Funzione per mostrare/nascondere la password
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('password');
+
+    if (togglePassword && passwordField) {
+        togglePassword.addEventListener('change', function() {
+            passwordField.type = this.checked ? 'text' : 'password';
+        });
+    }
+</script>
+
+{% endblock %}

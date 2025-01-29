@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gestione Spese{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Боковая навигация -->
+        {% if current_user.is_authenticated %}
+        <nav class="sidebar">
+            <h1><a href="{{ url_for('routes.index') }}" class="sidebar-title">Gestione Spese</a></h1>
+            <p class="user-greeting">
+                Ciao, <a href="{{ url_for('routes.profile') }}">{{ current_user.nome }}</a>!
+            </p>
+            <ul>
+                {% if current_user.ruolo == 'superuser' %}
+                <!-- Доступное меню для суперпользователя -->
+                <li><a href="{{ url_for('routes.list_items', model='utenti') }}">Utenti</a></li>
+                <li><a href="{{ url_for('routes.list_items', model='aziende') }}">Aziende</a></li>
+                {% else %}
+                <!-- Доступное меню для admin и user -->
+                <li><a href="{{ url_for('routes.list_items', model='lavoratori') }}">Lavoratori</a></li>
+                <li><a href="{{ url_for('routes.list_items', model='categorie_spese') }}">Categorie Spese</a></li>
+                <li><a href="{{ url_for('routes.list_items', model='spese') }}">Spese</a></li>
+                {% endif %}
+            </ul>
+            <div class="logout-button">
+                <a href="{{ url_for('routes.logout') }}" class="btn btn-logout">Logout</a>
+            </div>
+        </nav>
+        {% endif %}
+
+        <!-- Основной контент -->
+        <main class="content">
+            {% block content %}
+            <h1>Benvenuti</h1>
+            <p>Seleziona una sezione dal menu a sinistra.</p>
+            {% endblock %}
+        </main>
+    </div>
+</body>
+</html>

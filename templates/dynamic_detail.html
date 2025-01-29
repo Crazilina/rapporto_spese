@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Dettaglio di {{ get_meta(model_name, 'singular') }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Dettaglio di {{ get_meta(model_name, 'singular') }}</h2>
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <div class="card-content">
+        <table class="table-details">
+            <tbody>
+                {% for key, value in record.items() %}
+                        <tr>
+                            <th>
+                                {% if key == 'azienda' %}
+                                    Azienda
+                                {% elif key == 'lavoratore' %}
+                                    Lavoratore
+                                {% elif key == 'supervisore' %}
+                                    Supervisore
+                                {% elif key == 'categoria' %}
+                                    Categoria
+                                {% elif key == 'immagine_ricevuta' %}
+                                    Ricevuta
+                                {% else %}
+                                    {{ key.replace('_', ' ').capitalize() }}
+                                {% endif %}
+                            </th>
+                            <td>
+                                {% if key == 'immagine_ricevuta' and value %}
+                                    {% if value.endswith('.pdf') %}
+                                        <a href="{{ url_for('static', filename=value) }}" target="_blank" class="file-link">
+                                            Apri il PDF
+                                        </a>
+                                    {% elif value.endswith(('.jpg', '.jpeg', '.png')) %}
+                                        <a href="{{ url_for('static', filename=value) }}" target="_blank" class="file-link">
+                                            <img src="{{ url_for('static', filename=value) }}" alt="Ricevuta" class="img-preview" 
+                                                 style="max-width: 200px; max-height: 200px; object-fit: cover;">
+                                        </a>
+                                    {% endif %}
+                                {% elif 'data' in key.lower() and value %}
+                                    {{ value | format_date }}
+                                {% elif value is none %}
+                                    <em>Nessun dato</em>
+                                {% else %}
+                                    {{ value }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                {% endfor %}
+            </tbody>            
+        </table>
+    </div>
+    <div class="card-actions">
+        {% if can_edit %}
+        <a href="{{ edit_url }}" class="btn btn-outline-warning">Modifica</a>
+        {% endif %}
+        {% if can_delete %}
+        <form action="{{ delete_url }}" method="post" style="display:inline;" onsubmit="return confirm('Sei sicuro di voler eliminare questa voce?');">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn btn-outline-danger">Elimina</button>
+        </form>
+        {% endif %}
+        <a href="{{ url_for('routes.list_items', model=model_name) }}" class="btn btn-secondary">Torna alla lista</a>
+    </div>    
+</div>
+{% endblock %}

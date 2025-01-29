@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Registrazione{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Registrazione</h2>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('routes.register', token=token) if token else url_for('routes.register') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input 
+                type="text" 
+                id="nome" 
+                name="nome" 
+                class="form-input" 
+                placeholder="Inserisci il tuo nome" 
+                value="{{ lavoratore.nome if lavoratore else '' }}" 
+                {% if lavoratore %}readonly{% endif %} 
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="cognome">Cognome</label>
+            <input 
+                type="text" 
+                id="cognome" 
+                name="cognome" 
+                class="form-input" 
+                placeholder="Inserisci il tuo cognome" 
+                value="{{ lavoratore.cognome if lavoratore else '' }}" 
+                {% if lavoratore %}readonly{% endif %} 
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="form-input" 
+                placeholder="esempio@email.com" 
+                value="{{ email if email else request.form.get('email', '') }}" 
+                {% if lavoratore %}readonly{% endif %} 
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                class="form-input" 
+                placeholder="Inserisci una password" 
+                required>
+            <div style="margin-top: 5px;">
+                <input type="checkbox" id="togglePassword">
+                <label for="togglePassword">Mostra password</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="azienda_nome">Nome Azienda</label>
+            <input 
+                type="text" 
+                id="azienda_nome" 
+                name="azienda_nome" 
+                class="form-input" 
+                placeholder="Inserisci il nome dell'azienda" 
+                value="{{ azienda_nome if azienda_nome else request.form.get('azienda_nome', '') }}" 
+                {% if azienda_nome %}readonly{% endif %} 
+                required>
+        </div>
+
+        <button type="submit" class="form-button">Registrati</button>
+    </form>
+
+    <p>Hai già un account? <a href="{{ url_for('routes.login') }}">Accedi</a></p>
+</div>
+
+<script>
+    // Скрипт для показа/скрытия пароля
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('password');
+
+    if (togglePassword && passwordField) {
+        togglePassword.addEventListener('change', function() {
+            passwordField.type = this.checked ? 'text' : 'password';
+        });
+    }
+</script>
+
+{% endblock %}

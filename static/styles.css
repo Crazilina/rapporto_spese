@@ -1,0 +1,953 @@
+/* Общий стиль */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    text-align: center;
+    color: #18664c;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Сайдбар */
+.sidebar {
+    width: 130px;
+    background-color: #1b9f73;
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1b9f73;
+    padding-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.sidebar ul li a:hover {
+    background-color: #18664c;
+}
+
+/* Контент */
+.content {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+}
+
+.content h1, .content h2 {
+    margin-bottom: 20px;
+    color: #18664c;
+    font-weight: bold;
+}
+
+/* Таблица */
+.table-container {
+    width: 100%;
+    margin: 0 auto 10px auto;
+    overflow-x: scroll; /* Включает горизонтальную прокрутку */
+    position: relative; /* Позиционирование для скролл-бара */
+    padding-bottom: 12px;
+}
+
+/* Стили для горизонтального скролл-бара */
+.table-container::-webkit-scrollbar {
+    height: 12px; /* Высота скролл-бара */
+    background-color: #f1f1f1; /* Цвет фона трека */
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #e8f5f0; /* Цвет трека */
+    border-radius: 10px; /* Закругленные углы трека */
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #1b9f73; /* Цвет ползунка */
+    border-radius: 10px; /* Закругленные углы ползунка */
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #18664c; /* Цвет ползунка при наведении */
+}
+
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    table-layout: auto; /* Позволяет столбцам занимать пространство автоматически */
+}
+
+.table th,
+.table td {
+    vertical-align: middle; /* Центрирует содержимое по вертикали */
+    text-align: center;
+    padding: 4px 8px; /* Уменьшаем отступы внутри ячеек */
+    line-height: 1.2; /* Уменьшаем высоту строки */
+    border: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #e8f5f0;
+    color: #18664c;
+    font-weight: bold;
+}
+
+.table td {
+    vertical-align: middle;
+    white-space: nowrap; /* Убирает перенос текста */
+    overflow: hidden; /* Обрезает слишком длинное содержимое */
+    text-overflow: ellipsis; /* Добавляет троеточие для длинного текста */
+}
+
+.table .file-preview {
+    width: 40px; /* Устанавливаем фиксированную ширину для превью */
+    height: auto; /* Сохраняем пропорции */
+    margin: 0 auto; /* Центрируем превью */
+    display: block; /* Гарантируем блочный элемент */
+}
+
+.table td img,
+.table td a {
+    max-width: 40px; /* Устанавливаем ограничение на ширину */
+    max-height: 40px; /* Устанавливаем ограничение на высоту */
+    display: block;
+    margin: 0 auto; /* Центрируем */
+}
+
+.table td form, 
+.table td a {
+    display: inline-block; /* Делает кнопки в строку */
+    margin: 0 5px; /* Добавляет отступы между кнопками */
+    vertical-align: middle; /* Выравнивает кнопки по центру вертикали */
+}
+
+
+/* Кнопки в таблице */
+.btn {
+    padding: 4px 8px;
+    font-size: 0.85rem;
+    border-radius: 5px;
+    display: inline-block;
+    min-width: 70px; /* Минимальная ширина для кнопок */
+    align-items: center;
+    display: inline-flex;
+    justify-content: center; /* Горизонтальное выравнивание по центру */
+    text-align: center; /* Центрирование текста */
+    white-space: nowrap; /* Убедитесь, что текст не переносится */
+    line-height: 1; /* Устанавливает нормальное расстояние между строками */
+}
+
+
+.btn-outline-info {
+    color: #17a2b8;
+    border: 1px solid #17a2b8;
+    text-decoration: none;
+}
+
+.btn-outline-info:hover {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-outline-warning {
+    color: #ffc107;
+    border: 1px solid #ffc107;
+    text-decoration: none;
+}
+
+
+.btn-outline-warning:hover {
+    background-color: #ffc107;
+    color: white;
+}
+
+.btn-outline-danger {
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    background-color: white; /* Белый фон */
+    text-decoration: none;
+    font-weight: normal; /* Убираем жирность */
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-secondary {
+    color: #7f8c8d;
+    border: 1px solid #7f8c8d;
+    background-color: white;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background-color: #7f8c8d;
+    color: white;
+    border: 1px solid #7f8c8d;
+}
+
+
+/* Кнопка "Aggiungi nuovo" */
+.add-btn-container {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.button-frame, .btn-success {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none; /* Убираем рамку */
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #1b9f73; /* Зелёный цвет */
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.button-frame:hover, .btn-success:hover {
+    background-color: #18664c; /* Более тёмный зелёный при наведении */
+    color: white;
+}
+
+/* Форма создания/редактирования */
+.form-container {
+    width: 50%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #18664c;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    border-color: #1b9f73;
+    outline: none;
+    box-shadow: 0 0 5px rgba(27, 159, 115, 0.5);
+}
+
+.form-button {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #1b9f73;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.form-button:hover {
+    background-color: #18664c;
+}
+
+#preview {
+    max-width: 300px;
+    margin-top: 10px;
+    display: none;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+    word-wrap: break-word; /* Перенос слов */
+    overflow-wrap: break-word; /* Альтернатива для переноса */
+}
+.card-title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+    color: #2c3e50;
+}
+.table-details {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+.table-details th {
+    text-align: left;
+    width: 40%;
+    padding: 8px;
+    background-color: #ecf0f1;
+    word-wrap: break-word; /* Перенос длинных слов */
+}
+.table-details td {
+    padding: 8px;
+    background-color: #ffffff;
+    word-wrap: break-word; /* Перенос длинных слов */
+    max-width: 70%;
+}
+.card-actions {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Расстояние между кнопками */
+}
+
+.card-actions a,
+.card-actions button {
+    padding: 8px 16px;
+    font-size: 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Стили для кнопок */
+.card-actions .btn-outline-warning {
+    color: #ffc107;
+    border: 1px solid #ffc107;
+    background-color: transparent;
+}
+
+.card-actions .btn-outline-warning:hover {
+    background-color: #ffc107;
+    color: white;
+}
+
+.card-actions .btn-outline-danger {
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    background-color: transparent;
+}
+
+.card-actions .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.card-actions .btn-secondary {
+    color: #7f8c8d;
+    border: 1px solid #7f8c8d;
+    background-color: transparent;
+}
+
+.card-actions .btn-secondary:hover {
+    background-color: #7f8c8d;
+    color: white;
+}
+
+.file-preview {
+    width: 40px; /* Устанавливаем ширину */
+    height: auto; /* Сохраняем пропорции */
+    margin: 0 auto; /* Центрируем изображение в ячейке */
+    display: block; /* Делаем изображение блочным для центрирования */
+}
+
+.index-container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+/* Стили для баннера */
+.banner {
+    position: relative;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 600px; /* Увеличенная высота баннера */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Псевдоэлемент для изображения */
+.banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/static/background.png'); /* Укажите путь к вашему изображению */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.6; /* Прозрачность только для изображения */
+    z-index: 2; /* Устанавливаем уровень ниже текста */
+}
+
+/* Стили для текста */
+.banner div {
+    position: relative;
+    z-index: 2; /* Текст поверх изображения */
+    text-align: center;
+    color: #083d12; /* Цвет текста */
+}
+
+.banner h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Тень для лучшей читаемости */
+}
+
+.banner p {
+    font-size: 1.5rem;
+    margin: 10px 0 0;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Добавляем тень для текста */
+}
+
+
+/* Адаптация для экранов шириной менее 768px */
+@media (max-width: 768px) {
+    /* Сайдбар */
+    .sidebar {
+        width: 100px; /* Уменьшаем ширину */
+        font-size: 15px; /* Уменьшаем шрифт */
+        padding: 10px; /* Сужаем отступы */
+    }
+
+    .sidebar h2 {
+        font-size: 1.5em; /* Уменьшаем размер заголовка */
+        margin-bottom: 10px;
+    }
+
+    .sidebar ul li {
+        margin: 10px 0;
+    }
+
+    .sidebar ul li a {
+        font-size: 15px; /* Уменьшаем шрифт ссылок */
+        padding: 5px 8px; /* Уменьшаем отступы */
+    }
+
+    /* Контент */
+    .content {
+        padding: 15px; /* Уменьшаем отступы */
+    }
+
+    .content h1, .content h2 {
+        font-size: 1.5rem; /* Уменьшаем шрифт заголовков */
+    }
+
+    /* Таблицы */
+    .table-container {
+        overflow-x: auto; /* Добавляем горизонтальную прокрутку */
+    }
+
+    .table {
+        font-size: 12px; /* Уменьшаем шрифт в таблицах */
+    }
+
+    .table th,
+    .table td {
+        padding: 6px; /* Сужаем отступы внутри ячеек */
+    }
+
+    /* Кнопки */
+    .btn {
+        padding: 4px 8px; /* Уменьшаем отступы */
+        font-size: 0.8rem; /* Уменьшаем шрифт кнопок */
+    }
+
+    /* Кнопка "Aggiungi nuovo" */
+    .button-frame, .btn-success {
+        padding: 8px 16px; /* Уменьшаем отступы */
+        font-size: 0.9rem; /* Уменьшаем размер шрифта */
+    }
+
+    /* Форма */
+    .form-container {
+        width: 90%; /* Увеличиваем ширину формы */
+        padding: 15px; /* Уменьшаем отступы */
+    }
+
+    .form-label {
+        font-size: 14px; /* Уменьшаем шрифт */
+    }
+
+    .form-input {
+        font-size: 14px; /* Уменьшаем шрифт полей */
+        padding: 8px; /* Уменьшаем отступы */
+    }
+
+    .form-button {
+        font-size: 14px; /* Уменьшаем шрифт кнопки */
+        padding: 8px 12px; /* Уменьшаем отступы */
+    }
+
+    /* Карточки */
+    .card {
+        padding: 15px; /* Уменьшаем отступы */
+        max-width: 100%; /* Убираем ограничение ширины */
+    }
+
+    .card-title {
+        font-size: 20px; /* Уменьшаем размер заголовка */
+    }
+
+    .table-details th,
+    .table-details td {
+        font-size: 14px; /* Уменьшаем шрифт */
+        padding: 6px; /* Уменьшаем отступы */
+    }
+}
+
+/* Адаптация для экранов шириной менее 480px */
+@media (max-width: 480px) {
+    /* Общие настройки */
+    body {
+        font-size: 15px; /* Ещё больше уменьшаем шрифт */
+    }
+
+    /* Сайдбар */
+    .sidebar {
+        width: 80px; /* Ещё больше сужаем */
+        font-size: 15px; /* Ещё больше уменьшаем шрифт */
+        padding: 5px; /* Уменьшаем отступы */
+    }
+
+    .sidebar h2 {
+        font-size: 1rem; /* Уменьшаем заголовок */
+        margin-bottom: 5px;
+    }
+
+    .sidebar ul li a {
+        font-size: 13px; /* Ещё больше уменьшаем шрифт */
+        padding: 3px 5px; /* Уменьшаем отступы */
+    }
+
+    /* Контент */
+    .content {
+        padding: 10px; /* Уменьшаем отступы */
+    }
+
+    .content h1, .content h2 {
+        font-size: 1.3rem; /* Ещё больше уменьшаем шрифт заголовков */
+    }
+
+    /* Таблицы */
+    .table {
+        font-size: 12px; /* Уменьшаем шрифт в таблицах */
+    }
+
+    .table th,
+    .table td {
+        padding: 4px; /* Ещё больше уменьшаем отступы */
+    }
+
+    /* Кнопки */
+    .btn {
+        padding: 2px 6px; /* Ещё больше уменьшаем отступы */
+        font-size: 0.8rem; /* Уменьшаем шрифт кнопок */
+        min-width: 50px; /* Уменьшаем минимальную ширину */
+    }
+
+    /* Кнопка "Aggiungi nuovo" */
+    .button-frame, .btn-success {
+        padding: 6px 12px; /* Ещё больше уменьшаем отступы */
+        font-size: 0.6rem; /* Ещё больше уменьшаем размер шрифта */
+    }
+
+    /* Форма */
+    .form-container {
+        width: 90%; /* Растягиваем форму */
+        padding: 10px; /* Уменьшаем отступы */
+    }
+
+    .form-label {
+        font-size: 13px; /* Ещё больше уменьшаем шрифт */
+    }
+
+    .form-input {
+        font-size: 13px; /* Ещё больше уменьшаем шрифт в полях */
+        padding: 6px; /* Уменьшаем отступы */
+    }
+
+    .form-button {
+        font-size: 13px; /* Уменьшаем шрифт кнопки */
+        padding: 6px 10px; /* Уменьшаем отступы */
+    }
+
+    /* Карточки */
+    .card {
+        padding: 10px; /* Уменьшаем отступы */
+    }
+
+    .card-title {
+        font-size: 15px; /* Уменьшаем размер заголовка */
+    }
+
+    .table-details th,
+    .table-details td {
+        font-size: 13px; /* Уменьшаем шрифт */
+        padding: 4px; /* Уменьшаем отступы */
+    }
+}
+
+
+/* Общие стили для ссылок */
+.file-link {
+    display: inline-block;
+    text-align: center;
+    width: 300px;
+    max-width: 100%; /* Для адаптации */
+    margin: 10px auto;
+    overflow-y: auto; /* Включаем вертикальный скролл */
+    max-height: 400px; /* Ограничиваем высоту, чтобы скролл был виден */
+    border: 1px solid #ddd; /* Добавляем рамку для наглядности */
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* PDF (iframe) */
+.pdf-preview {
+    width: 100%;
+    height: 100%; /* Высота теперь контролируется контейнером */
+    border: none;
+    pointer-events: none; /* Запрещает взаимодействие внутри iframe */
+}
+
+/* Изображения */
+.img-preview {
+    width: 100%;
+    height: auto;
+    cursor: pointer; /* Указывает на кликабельность */
+    border: none;
+}
+
+/* Адаптация для маленьких экранов */
+@media (max-width: 768px) {
+    .file-link {
+        width: 100%; /* Растягиваем на всю ширину экрана */
+        max-height: 300px; /* Уменьшаем высоту для маленьких экранов */
+    }
+
+    .pdf-preview {
+        height: 100%; /* Высота контролируется контейнером */
+    }
+
+    .img-preview {
+        max-height: 300px; /* Ограничиваем высоту изображений */
+    }
+}
+
+@media (max-width: 480px) {
+    .file-link {
+        width: 100%; /* Полная ширина */
+        max-height: 250px; /* Еще меньше высота для узких экранов */
+    }
+
+    .pdf-preview {
+        height: 100%; /* Высота контролируется контейнером */
+    }
+
+    .img-preview {
+        max-height: 250px; /* Уменьшаем высоту изображений */
+    }
+}
+
+/* Стили для верхней панели */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1b9f73;
+    color: white;
+    padding: 20px 20px 30px; /* Увеличенный нижний отступ */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-title {
+    text-align: center;
+    margin-bottom: 15px; /* Отступ между заголовком и кнопками */
+}
+
+.header-title h1 {
+    font-size: 2rem;
+    margin: 0;
+    font-weight: bold;
+}
+
+.header-title h1 a {
+    text-decoration: none;
+    color: white;
+}
+
+.user-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.auth-buttons a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-login {
+    background-color: #18664c;
+}
+
+.btn-login:hover {
+    background-color: #145940;
+}
+
+.btn-register {
+    background-color: #ffc107;
+    color: #18664c;
+}
+
+.btn-register:hover {
+    background-color: #e0a800;
+}
+
+/* Для мобильных устройств */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 10px;
+    }
+
+    .auth-buttons a {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .auth-buttons a {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+}
+
+.flash-messages {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.alert {
+    padding: 10px 20px;
+    margin: 10px auto;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+}
+
+.alert.success {
+    color: green;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.alert.error {
+    color: red;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 200px; /* Увеличим ширину для лучшего отображения */
+    background-color: #1b9f73;
+    padding: 10px;
+}
+
+.sidebar h1 {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar h1 a {
+    text-decoration: none;
+    color: white;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    display: block;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #18664c;
+}
+
+.logout-button {
+    margin-top: auto;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.btn-logout {
+    color: #fff;
+    background-color: #e74c3c;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-logout:hover {
+    background-color: #c0392b;
+}
+
+
+.profile-container, .users-container {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details {
+    list-style: none;
+    padding: 0;
+}
+
+.profile-details li {
+    margin: 10px 0;
+}
+
+/* Контейнер для кнопок в форме */
+.form-button-container {
+    display: flex;
+    flex-direction: column; /* Расположить кнопки вертикально */
+    gap: 10px; /* Расстояние между кнопками */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+/* Для кнопки подтверждения */
+.form-button.secondary {
+    background-color: #ffc107;
+    color: #18664c;
+    font-weight: bold;
+}
+
+.form-button.secondary:hover {
+    background-color: #e0a800;
+    color: white;
+}
+
+.profile-actions a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.profile-actions .btn-update-password {
+    background-color: #1b9f73; /* Зелёный цвет */
+    border: 1px solid #1b9f73;
+}
+
+.profile-actions .btn-update-password:hover {
+    background-color: #18664c; /* Тёмно-зелёный при наведении */
+}
+
+.profile-actions .btn-back {
+    background-color: #ffc107; /* Жёлтый цвет */
+    border: 1px solid #ffc107;
+    color: #18664c;
+}
+
+.profile-actions .btn-back:hover {
+    background-color: #e0a800; /* Тёмно-жёлтый при наведении */
+    color: white;
+}

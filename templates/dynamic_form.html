@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block title %}{{ action.capitalize() }} {{ model.capitalize() }}{% endblock %}
+
+{% block content %}
+<h2 class="form-title">{{ action.capitalize() }} {{ model.capitalize() }}</h2>
+
+<!-- Flash messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endwith %}
+
+<form 
+    method="post" 
+    action="{{ url_for('routes.' ~ ('create_item' if action == 'creare' else 'update_item'), model=model, item_id=item.id if action == 'modificare' else None) }}" 
+    enctype="multipart/form-data" 
+    class="form-container">
+    
+    <!-- CSRF-токен -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    {% for column in columns %}
+    {% if column.name not in ['id', 'data_creazione', 'data_modifica', 'password_hash', 'utente_id'] %}
+    <div class="form-group">
+        <label for="{{ column.name }}" class="form-label">
+            {% if column.name == 'id_lavoratore' %}
+            Lavoratore
+            {% elif column.name == 'id_supervisore' %}
+            Supervisore
+            {% elif column.name == 'id_categoria' %}
+            Categoria
+            {% elif column.name == 'valuta' %}
+            Valuta
+            {% elif column.name == 'metodo_pagamento' %}
+            Metodo di pagamento
+            {% elif column.name == 'stato' %}
+            Stato
+            {% elif column.name == 'azienda_id' %}
+            Azienda
+            {% elif column.name == 'data_di_nascita' %}
+            Data di nascita
+            {% elif column.name == 'data_inizio' %}
+            Data di inizio
+            {% elif column.name == 'data_fine' %}
+            Data di fine
+            {% elif column.name == 'totale_importo' %}
+            Totale Importo
+            {% else %}
+            {{ column.name.replace('_', ' ').capitalize() }}
+            {% endif %}
+        </label>
+        {% if column.name == 'id_lavoratore' %}
+        <!-- Dropdown для выбора lavoratore -->
+        <select name="id_lavoratore" id="id_lavoratore" class="form-input">
+            <option value="">-- Seleziona Lavoratore --</option>
+            {% for lavoratore in lavoratori %}
+            <option value="{{ lavoratore.id }}" {% if item and item[column.name] == lavoratore.id %}selected{% endif %}>
+                {{ lavoratore.nome }} {{ lavoratore.cognome }}
+            </option>
+            {% endfor %}
+        </select>
+
+        {% elif column.name == 'id_supervisore' %}
+        <!-- Dropdown для выбора supervisore -->
+        <select name="id_supervisore" id="id_supervisore" class="form-input">
+            <option value="">-- Seleziona Supervisore --</option>
+            {% for supervisore in supervisori %}
+            <option value="{{ supervisore.id }}" {% if item and item[column.name] == supervisore.id %}selected{% endif %}>
+                {{ supervisore.nome }} {{ supervisore.cognome }}
+            </option>
+            {% endfor %}
+        </select>
+
+        {% elif column.name == 'id_categoria' %}
+        <!-- Dropdown для выбора categoria -->
+        <select name="id_categoria" id="id_categoria" class="form-input">
+            <option value="">-- Seleziona Categoria --</option>
+            {% for categoria in categorie %}
+            <option value="{{ categoria.id }}" {% if item and item[column.name] == categoria.id %}selected{% endif %}>
+                {{ categoria.nome_categoria }}
+            </option>
+            {% endfor %}
+        </select>
+
+        {% elif column.name == 'valuta' %}
+        <!-- Dropdown для выбора valuta -->
+        <select name="valuta" id="valuta" class="form-input">
+            {% for option in VALUTE %}
+            <option value="{{ option }}" {% if item and item[column.name] == option %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+
+        {% elif column.name == 'metodo_pagamento' %}
+        <!-- Dropdown для выбора metodo_pagamento -->
+        <select name="metodo_pagamento" id="metodo_pagamento" class="form-input">
+            {% for option in METODI_PAGAMENTO %}
+            <option value="{{ option }}" {% if item and item[column.name] == option %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+
+        {% elif column.name == 'stato' %}
+        <!-- Dropdown для выбора stato -->
+        <select name="stato" id="stato" class="form-input">
+            {% for option in STATI %}
+            <option value="{{ option }}" {% if item and item[column.name] == option %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+
+        {% elif column.name == 'azienda_id' %}
+        <!-- Dropdown для выбора azienda (отображается название компании) -->
+        <select name="azienda_id" id="azienda_id" class="form-input" {% if current_user.ruolo != 'superuser' %}readonly{% endif %}>
+            <option value="">-- Seleziona Azienda --</option>
+            {% for azienda in aziende %}
+            <option value="{{ azienda.id }}" {% if item and item[column.name] == azienda.id %}selected{% endif %}>
+                {{ azienda.nome }}
+            </option>
+            {% endfor %}
+        </select>
+
+        {% elif 'data' in column.name %}
+        <!-- Поле выбора даты для всех полей типа Date -->
+        <input type="date" name="{{ column.name }}" id="{{ column.name }}" class="form-input" 
+               value="{{ item[column.name].strftime('%Y-%m-%d') if item and item[column.name] else '' }}">
+
+        {% elif column.name == 'immagine_ricevuta' %}
+        <input type="file" name="immagine_ricevuta" id="immagine_ricevuta" class="form-input" accept="image/*,.pdf" onchange="previewFile(event)">
+        <div class="preview-container">
+            {% if item and item[column.name] %}
+            {% if item[column.name].endswith(('jpg', 'png', 'jpeg')) %}
+            <img id="preview-image" src="{{ url_for('static', filename=item[column.name]) }}" alt="Anteprima immagine" style="max-width: 300px; margin-top: 10px;">
+            {% elif item[column.name].endswith('pdf') %}
+            <iframe id="preview-pdf" src="{{ url_for('static', filename=item[column.name]) }}" style="width: 100%; height: 500px; margin-top: 10px;" frameborder="0"></iframe>
+            {% endif %}
+            {% endif %}
+        </div>
+        {% elif 'Date' in column.type|get_type_name %}
+        <input type="date" name="{{ column.name }}" id="{{ column.name }}" class="form-input" value="{{ item[column.name] if item else '' }}">
+        {% elif 'Integer' in column.type|get_type_name or 'Float' in column.type|get_type_name or 'Numeric' in column.type|get_type_name %}
+        <input type="number" step="0.01" name="{{ column.name }}" id="{{ column.name }}" class="form-input" value="{{ item[column.name] if item else '' }}">
+        {% else %}
+        <input type="text" name="{{ column.name }}" id="{{ column.name }}" class="form-input" value="{{ item[column.name] if item else '' }}">
+        {% endif %}
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <button type="submit" class="form-button">{{ action.capitalize() }}</button>
+</form>
+
+<script>
+    function previewFile(event) {
+        const input = event.target;
+        const file = input.files[0];
+
+        const previewImage = document.getElementById('preview-image');
+        const previewPDF = document.getElementById('preview-pdf');
+
+        if (file) {
+            const fileType = file.type;
+
+            if (fileType.includes('image')) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                    previewPDF.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            } else if (fileType === 'application/pdf') {
+                const fileURL = URL.createObjectURL(file);
+                previewPDF.src = fileURL;
+                previewPDF.style.display = 'block';
+                previewImage.style.display = 'none';
+            }
+        }
+    }
+</script>
+
+{% endblock %}

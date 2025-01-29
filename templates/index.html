@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Gestione Spese{% endblock %}
+
+{% block content %}
+<div class="banner">
+    <div>
+        {% if current_user.is_authenticated %}
+            <h1>Benvenuto, {{ current_user.nome }}!</h1>
+            {% if current_user.ruolo == 'superuser' %}
+                <p>Hai accesso come <strong>Superuser</strong>. Puoi gestire solo <strong>Utenti</strong> e <strong>Aziende</strong>.</p>
+                <p>Usa il menu a sinistra per accedere alle funzionalità disponibili.</p>
+            {% elif current_user.ruolo == 'admin' %}
+                <p>Sei registrato come <strong>Amministratore</strong> per l'azienda: <strong>{{ current_user.azienda.nome }}</strong>.</p>
+                <p>Puoi gestire lavoratori, categorie di spesa e monitorare le spese aziendali.</p>
+            {% elif current_user.ruolo == 'user' %}
+                <p>Sei registrato come <strong>Utente</strong> dell'azienda: <strong>{{ current_user.azienda.nome }}</strong>.</p>
+                <p>Puoi gestire le tue spese personali e visualizzare categorie aziendali.</p>
+            {% endif %}
+        {% else %}
+            <h1>Benvenuti nel Sistema di Gestione delle Spese Aziendali</h1>
+            <p>
+                Effettua il <a href="{{ url_for('routes.login') }}">login</a> 
+                o <a href="{{ url_for('routes.register') }}">registrati</a> per accedere al sistema.
+            </p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="main-content">
+    {% if current_user.is_authenticated %}
+        <h2>Accedi alle funzionalità</h2>
+        {% if current_user.ruolo == 'superuser' %}
+            <p>
+                Come <strong>Superuser</strong>, hai accesso alla gestione di <strong>Utenti</strong> e <strong>Aziende</strong>. 
+                Usa il menu a sinistra per navigare.
+            </p>
+        {% elif current_user.ruolo == 'admin' %}
+            <p>
+                Come <strong>Amministratore</strong>, puoi gestire lavoratori, categorie di spesa e monitorare le spese aziendali.
+            </p>
+        {% elif current_user.ruolo == 'user' %}
+            <p>
+                Come <strong>Utente</strong>, puoi registrare e monitorare le tue spese personali e consultare le categorie aziendali.
+            </p>
+        {% endif %}
+    {% else %}
+        <h2>Inizia subito</h2>
+        <p>
+            Registrati per accedere al sistema e iniziare a gestire le spese della tua azienda.
+        </p>
+    {% endif %}
+</div>
+{% endblock %}

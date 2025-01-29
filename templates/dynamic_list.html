@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}{{ model.capitalize() }}{% endblock %}
+
+{% block content %}
+<h2>Lista di {{ model | format_model_name }}</h2>
+<!-- Flash messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="flash-messages">
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+{% if items %}
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                {% for column in columns %}
+                <th>
+                    {{ column.replace('id_', '').replace('_id', '').replace('_', ' ').capitalize() }}
+                </th>
+                {% endfor %}
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                {% for column in columns %}
+                <td>
+                    {% if column == 'data_creazione' or column == 'data_modifica' %}
+                    {{ item[column] | format_date }}
+                    {% elif column == 'immagine_ricevuta' and item[column] %}
+                    {% set file_path = item[column] %}
+                    {% if file_path.endswith('.pdf') %}
+                        <a href="{{ url_for('static', filename=file_path) }}" target="_blank">
+                            <img src="{{ url_for('static', filename='pdf-placeholder.png') }}" alt="PDF Preview" class="file-preview">
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('static', filename=file_path) }}" target="_blank">
+                        <img src="{{ url_for('static', filename=file_path) }}" alt="Image Preview" class="file-preview">
+                        </a>
+                    {% endif %}
+                    {% else %}
+                    {{ item[column] or 'Non specificato' }}
+                    {% endif %}
+                </td>
+                {% endfor %}
+                <td>
+                    <!-- Проверка прав на отображение кнопок производится сервером -->
+                    <a href="{{ item['view_url'] }}" class="btn btn-outline-info">Vedi</a>
+
+                    {% if item['can_edit'] %}
+                    <a href="{{ item['edit_url'] }}" class="btn btn-outline-warning">Modifica</a>
+                    {% endif %}
+
+                    {% if item['can_delete'] %}
+                    <form action="{{ item['delete_url'] }}" method="post" style="display:inline;"
+                        onsubmit="return confirm('Sei sicuro di voler eliminare questa voce?');">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn btn-outline-danger">Elimina</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="pagination">
+    {% if pagination.has_prev %}
+    <a href="{{ url_for('routes.list_items', model=model, page=pagination.prev_num) }}" class="btn btn-secondary">Indietro</a>
+    {% endif %}
+    {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+    {% if page_num %}
+    <a href="{{ url_for('routes.list_items', model=model, page=page_num) }}"
+        class="btn {% if page_num == pagination.page %}btn-primary{% else %}btn-outline-primary{% endif %}">
+        {{ page_num }}
+    </a>
+    {% else %}
+    <span class="btn btn-disabled">...</span>
+    {% endif %}
+    {% endfor %}
+    {% if pagination.has_next %}
+    <a href="{{ url_for('routes.list_items', model=model, page=pagination.next_num) }}" class="btn btn-secondary">Avanti</a>
+    {% endif %}
+</div>
+{% else %}
+<p>Non ci sono dati disponibili per {{ model | format_model_name }}.</p>
+{% endif %}
+
+<div class="add-btn-container">
+    {% if can_create %}
+    <a href="{{ url_for('routes.create_item', model=model) }}" class="button-frame green-button">
+        Aggiungi {{ "Nuovo" if get_meta(model, 'gender') == "maschile" else "Nuova" }} {{ get_meta(model, 'singular') }}
+    </a>
+    {% endif %}
+</div>
+{% endblock %}

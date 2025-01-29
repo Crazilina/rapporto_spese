@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Profilo Utente{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <h2>Il tuo profilo</h2>
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+    <ul class="profile-details">
+        <li><strong>Nome:</strong> {{ user_data.nome }}</li>
+        <li><strong>Email:</strong> {{ user_data.email }}</li>
+        <li><strong>Azienda:</strong> {{ user_data.azienda or 'Non associato a nessuna azienda' }}</li>
+        <li><strong>Creato il:</strong> {{ user_data.data_creazione | format_date }}</li>
+    </ul>
+    <div class="profile-actions">
+        <a href="{{ url_for('routes.update_password', user_id=current_user.id) }}" class="btn btn-update-password">Aggiorna Password</a>
+        <a href="{{ url_for('routes.index') }}" class="btn btn-back">Torna alla Home</a>
+    </div>
+</div>
+{% endblock %}
