@@ -12,6 +12,24 @@ body {
     height: 100vh;
 }
 
+.user-greeting {
+    font-size: 1.2rem; /* Размер шрифта для приветствия */
+    margin-bottom: 15px; /* Отступ снизу */
+    color: white; /* Цвет текста */
+    text-align: center; /* Выравнивание текста по центру */
+}
+
+.user-greeting a {
+    color: #ffc107; /* Желтый цвет для ссылки */
+    font-weight: bold; /* Жирный текст */
+    text-decoration: none; /* Убираем подчеркивание */
+}
+
+.user-greeting a:hover {
+    color: #e0a800; /* Темно-желтый цвет при наведении */
+    text-decoration: underline; /* Добавляем подчеркивание при наведении */
+}
+
 /* Сайдбар */
 .sidebar {
     width: 130px;
@@ -449,194 +467,6 @@ body {
 }
 
 
-/* Адаптация для экранов шириной менее 768px */
-@media (max-width: 768px) {
-    /* Сайдбар */
-    .sidebar {
-        width: 100px; /* Уменьшаем ширину */
-        font-size: 15px; /* Уменьшаем шрифт */
-        padding: 10px; /* Сужаем отступы */
-    }
-
-    .sidebar h2 {
-        font-size: 1.5em; /* Уменьшаем размер заголовка */
-        margin-bottom: 10px;
-    }
-
-    .sidebar ul li {
-        margin: 10px 0;
-    }
-
-    .sidebar ul li a {
-        font-size: 15px; /* Уменьшаем шрифт ссылок */
-        padding: 5px 8px; /* Уменьшаем отступы */
-    }
-
-    /* Контент */
-    .content {
-        padding: 15px; /* Уменьшаем отступы */
-    }
-
-    .content h1, .content h2 {
-        font-size: 1.5rem; /* Уменьшаем шрифт заголовков */
-    }
-
-    /* Таблицы */
-    .table-container {
-        overflow-x: auto; /* Добавляем горизонтальную прокрутку */
-    }
-
-    .table {
-        font-size: 12px; /* Уменьшаем шрифт в таблицах */
-    }
-
-    .table th,
-    .table td {
-        padding: 6px; /* Сужаем отступы внутри ячеек */
-    }
-
-    /* Кнопки */
-    .btn {
-        padding: 4px 8px; /* Уменьшаем отступы */
-        font-size: 0.8rem; /* Уменьшаем шрифт кнопок */
-    }
-
-    /* Кнопка "Aggiungi nuovo" */
-    .button-frame, .btn-success {
-        padding: 8px 16px; /* Уменьшаем отступы */
-        font-size: 0.9rem; /* Уменьшаем размер шрифта */
-    }
-
-    /* Форма */
-    .form-container {
-        width: 90%; /* Увеличиваем ширину формы */
-        padding: 15px; /* Уменьшаем отступы */
-    }
-
-    .form-label {
-        font-size: 14px; /* Уменьшаем шрифт */
-    }
-
-    .form-input {
-        font-size: 14px; /* Уменьшаем шрифт полей */
-        padding: 8px; /* Уменьшаем отступы */
-    }
-
-    .form-button {
-        font-size: 14px; /* Уменьшаем шрифт кнопки */
-        padding: 8px 12px; /* Уменьшаем отступы */
-    }
-
-    /* Карточки */
-    .card {
-        padding: 15px; /* Уменьшаем отступы */
-        max-width: 100%; /* Убираем ограничение ширины */
-    }
-
-    .card-title {
-        font-size: 20px; /* Уменьшаем размер заголовка */
-    }
-
-    .table-details th,
-    .table-details td {
-        font-size: 14px; /* Уменьшаем шрифт */
-        padding: 6px; /* Уменьшаем отступы */
-    }
-}
-
-/* Адаптация для экранов шириной менее 480px */
-@media (max-width: 480px) {
-    /* Общие настройки */
-    body {
-        font-size: 15px; /* Ещё больше уменьшаем шрифт */
-    }
-
-    /* Сайдбар */
-    .sidebar {
-        width: 80px; /* Ещё больше сужаем */
-        font-size: 15px; /* Ещё больше уменьшаем шрифт */
-        padding: 5px; /* Уменьшаем отступы */
-    }
-
-    .sidebar h2 {
-        font-size: 1rem; /* Уменьшаем заголовок */
-        margin-bottom: 5px;
-    }
-
-    .sidebar ul li a {
-        font-size: 13px; /* Ещё больше уменьшаем шрифт */
-        padding: 3px 5px; /* Уменьшаем отступы */
-    }
-
-    /* Контент */
-    .content {
-        padding: 10px; /* Уменьшаем отступы */
-    }
-
-    .content h1, .content h2 {
-        font-size: 1.3rem; /* Ещё больше уменьшаем шрифт заголовков */
-    }
-
-    /* Таблицы */
-    .table {
-        font-size: 12px; /* Уменьшаем шрифт в таблицах */
-    }
-
-    .table th,
-    .table td {
-        padding: 4px; /* Ещё больше уменьшаем отступы */
-    }
-
-    /* Кнопки */
-    .btn {
-        padding: 2px 6px; /* Ещё больше уменьшаем отступы */
-        font-size: 0.8rem; /* Уменьшаем шрифт кнопок */
-        min-width: 50px; /* Уменьшаем минимальную ширину */
-    }
-
-    /* Кнопка "Aggiungi nuovo" */
-    .button-frame, .btn-success {
-        padding: 6px 12px; /* Ещё больше уменьшаем отступы */
-        font-size: 0.6rem; /* Ещё больше уменьшаем размер шрифта */
-    }
-
-    /* Форма */
-    .form-container {
-        width: 90%; /* Растягиваем форму */
-        padding: 10px; /* Уменьшаем отступы */
-    }
-
-    .form-label {
-        font-size: 13px; /* Ещё больше уменьшаем шрифт */
-    }
-
-    .form-input {
-        font-size: 13px; /* Ещё больше уменьшаем шрифт в полях */
-        padding: 6px; /* Уменьшаем отступы */
-    }
-
-    .form-button {
-        font-size: 13px; /* Уменьшаем шрифт кнопки */
-        padding: 6px 10px; /* Уменьшаем отступы */
-    }
-
-    /* Карточки */
-    .card {
-        padding: 10px; /* Уменьшаем отступы */
-    }
-
-    .card-title {
-        font-size: 15px; /* Уменьшаем размер заголовка */
-    }
-
-    .table-details th,
-    .table-details td {
-        font-size: 13px; /* Уменьшаем шрифт */
-        padding: 4px; /* Уменьшаем отступы */
-    }
-}
-
-
 /* Общие стили для ссылок */
 .file-link {
     display: inline-block;
@@ -665,37 +495,6 @@ body {
     height: auto;
     cursor: pointer; /* Указывает на кликабельность */
     border: none;
-}
-
-/* Адаптация для маленьких экранов */
-@media (max-width: 768px) {
-    .file-link {
-        width: 100%; /* Растягиваем на всю ширину экрана */
-        max-height: 300px; /* Уменьшаем высоту для маленьких экранов */
-    }
-
-    .pdf-preview {
-        height: 100%; /* Высота контролируется контейнером */
-    }
-
-    .img-preview {
-        max-height: 300px; /* Ограничиваем высоту изображений */
-    }
-}
-
-@media (max-width: 480px) {
-    .file-link {
-        width: 100%; /* Полная ширина */
-        max-height: 250px; /* Еще меньше высота для узких экранов */
-    }
-
-    .pdf-preview {
-        height: 100%; /* Высота контролируется контейнером */
-    }
-
-    .img-preview {
-        max-height: 250px; /* Уменьшаем высоту изображений */
-    }
 }
 
 /* Стили для верхней панели */
@@ -763,30 +562,6 @@ body {
 
 .btn-register:hover {
     background-color: #e0a800;
-}
-
-/* Для мобильных устройств */
-@media (max-width: 768px) {
-    .header {
-        padding: 15px 10px;
-    }
-
-    .auth-buttons a {
-        font-size: 0.9rem;
-        padding: 6px 12px;
-    }
-}
-
-@media (max-width: 480px) {
-    .auth-buttons {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .auth-buttons a {
-        font-size: 0.8rem;
-        padding: 5px 10px;
-    }
 }
 
 .flash-messages {
@@ -950,4 +725,265 @@ body {
 .profile-actions .btn-back:hover {
     background-color: #e0a800; /* Тёмно-жёлтый при наведении */
     color: white;
+}
+
+
+/* Стили для экранов шириной до 768px (например, iPhone) */
+@media only screen and (max-width: 768px) {
+
+    /* Центрирование кнопки "Aggiungi Nuovo" */
+    .add-btn-container {
+        text-align: center; /* Центрируем кнопку */
+        margin: 12px 0; /* Уменьшаем отступы сверху и снизу */
+    }
+
+    .add-btn-container .button-frame {
+        font-size: 0.75rem; /* Уменьшаем размер текста */
+        padding: 6px 13px; /* Уменьшаем внутренние отступы */
+        border-radius: 7px; /* Уменьшаем радиус закругления */
+    }
+
+    .auth-buttons a {
+        padding: 6px 12px; /* Уменьшаем отступы */
+        font-size: 0.9rem; /* Уменьшаем размер текста */
+    }
+
+    /* Баннер */
+    .banner {
+        padding: 10px;
+        height: 400px; /* Уменьшаем высоту баннера */
+    }
+    .banner div {
+        font-size: 1.2rem;
+        padding: 10px;
+    }
+
+    .banner h1 {
+        font-size: 1.9rem; /* Уменьшаем размер текста */
+    }
+
+    .banner p {
+        font-size: 1rem; /* Уменьшаем размер текста */
+        margin: 5px 0 0;
+        word-wrap: break-word; /* Перенос текста */
+    }
+
+    /* Общий стиль */
+    body {
+        font-size: 12px; /* Уменьшение общего размера шрифта */
+        text-align: left; /* Текст выравнивается влево */
+    }
+
+    /* Кнопки */
+    .btn {
+        padding: 6px 12px; /* Уменьшаем отступы */
+        font-size: 13px; /* Уменьшаем размер шрифта */
+        min-width: 45px; /* Минимальная ширина кнопки */
+    }
+    .btn-outline-info,
+    .btn-outline-warning,
+    .btn-outline-danger,
+    .btn-secondary {
+        font-size: 0.8rem; /* Уменьшаем текст кнопок */
+        padding: 4px 10px; /* Уменьшаем внутренние отступы */
+        border-radius: 4px; /* Закругляем углы */
+    }
+
+    /* Карточки */
+    .card {
+        width: 95%; /* Уменьшение ширины карточки */
+        margin: auto; /* Центрируем карточку */
+        padding: 7px; /* Уменьшаем отступы */
+        word-wrap: break-word; /* Перенос текста */
+    }
+
+    .card-title {
+        font-size: 1.0em; /* Уменьшаем размер заголовка */
+    }
+
+    .card-actions {
+        display: flex; /* Flexbox для выравнивания кнопок */
+        flex-wrap: wrap; /* Кнопки переносятся */
+        justify-content: center; /* Центрируем кнопки */
+        gap: 8px; /* Промежуток между кнопками */
+        margin-top: 10px; /* Отступ сверху */
+        word-wrap: break-word; /* Перенос текста */
+    }
+
+    .card-actions .btn {
+        font-size: 0.9rem; /* Уменьшаем размер кнопок */
+        padding: 4px 8px; /* Уменьшаем отступы */
+        min-width: 70px; /* Минимальная ширина кнопок */
+    }
+
+    /* Общий контейнер текста */
+    .content {
+        padding: 10px; /* Добавляем внутренние отступы */
+    }
+
+    /* Центрирование текста */
+    .content h2,
+    .content p {
+        text-align: center; /* Выравниваем текст по центру */
+    }
+
+    .file-link {
+        width: 80%;
+    }
+    .flash-messages {
+        font-size: 0.85rem; /* Уменьшаем размер текста сообщений */
+        padding: 10px; /* Уменьшаем отступы */
+    }
+
+    /* Форма создания/редактирования */
+    .form-container {
+        width: 90%; /* Уменьшаем ширину формы */
+        margin: 20px auto; /* Центрируем форму с меньшими отступами */
+        padding: 15px; /* Уменьшаем внутренние отступы */
+    }
+
+    .form-label {
+        font-size: 1.1em; /* Уменьшаем размер текста метки */
+    }
+
+    .form-input {
+        padding: 8px; /* Уменьшаем отступы */
+        font-size: 0.9em; /* Уменьшаем размер текста */
+    }
+
+    .form-button {
+        padding: 8px; /* Уменьшаем отступы */
+        font-size: 0.9em; /* Уменьшаем размер текста */
+    }
+
+    .form-title{
+        font-size: 1.2rem; /* Уменьшаем размер шрифта заголовка */
+    }
+
+    /* Стили для заголовка и текста */
+    h2 {
+        font-size: 1.2rem; /* Уменьшаем размер шрифта заголовка */
+        margin-bottom: 10px; /* Уменьшаем отступ снизу */
+    }
+
+    .header-title h1 {
+        font-size: 1.0rem; /* Уменьшаем размер заголовка */
+    }
+
+    p {
+        font-size: 1rem; /* Уменьшаем размер шрифта текста */
+        line-height: 1.4; /* Улучшаем читаемость */
+        margin: 10px 15px; /* Добавляем отступы */
+        text-align: center;
+    }
+
+
+    /* Уменьшаем кнопки пагинации */
+    .pagination .btn {
+        font-size: 0.8rem; /* Уменьшаем размер текста */
+        padding: 5px 10px; /* Уменьшаем внутренние отступы */
+        border-radius: 3px; /* Уменьшаем радиус */
+        margin: 2px; /* Уменьшаем отступы между кнопками */
+        display: flex;
+    }
+
+    /* Центрируем пагинацию внутри карточки контента */
+    .pagination {
+        display: flex;
+        justify-content: center; /* Центрируем кнопки пагинации */
+        margin: 10px auto; /* Добавляем отступ сверху и снизу */
+        max-width: 300px; /* Ограничиваем ширину пагинации */
+    }
+
+    /* Профиль и контейнеры */
+    .profile-container, .users-container {
+        max-width: 100%; /* Делаем ширину адаптивной */
+        padding: 10px; /* Уменьшаем отступы */
+    }
+
+    .profile-details li {
+        font-size: 0.9em; /* Уменьшаем размер текста */
+        text-align: center;
+    }
+
+    /* Уменьшаем кнопки в разделе профиля */
+    .profile-actions .btn {
+        font-size: 0.8rem; /* Уменьшаем размер текста */
+        padding: 7px 12px; /* Уменьшаем внутренние отступы */
+        border-radius: 4px; /* Уменьшаем радиус */
+        display: flex; /* Включаем Flexbox */
+        justify-content: center; /* Центрируем по горизонтали */
+        gap: 8px; /* Промежуток между кнопками */
+        margin-top: 8px; /* Отступ сверху */
+    }
+
+    
+    /* Сайдбар */
+    .sidebar {
+        width: 90px; /* Уменьшаем ширину сайдбара */
+        padding: 10px; /* Уменьшаем отступы внутри */
+        font-size: 1.0rem;
+    }
+
+    .sidebar h1 {
+        font-size: 1.2em; /* Уменьшаем размер заголовка */
+        text-align: center;
+    }
+
+    .sidebar ul li a {
+        font-size: 1.0em; /* Уменьшаем размер текста ссылок */
+        padding: 6px 10px; /* Уменьшаем отступы */
+        text-align: center;
+    }
+
+    /* Таблица */
+    .table {
+        width: 100%; /* Таблица занимает всю ширину */
+        table-layout: auto; /* Автоматическая ширина колонок */
+    }
+
+    .table-container {
+        overflow-x: auto; /* Включаем горизонтальную прокрутку, если таблица не помещается */
+        overflow-y: auto;
+    }
+
+    .table th, .table td {
+        text-align: center; /* Выравниваем текст по центру */
+        padding: 5px; /* Уменьшаем отступы */
+        font-size: 0.9rem; /* Уменьшаем размер текста */
+        white-space: nowrap; /* Запрещаем перенос строк */
+    }
+
+    .table-details th,
+    .table-details td {
+        font-size: 0.8rem; /* Уменьшаем текст в таблице */
+        padding: 6px; /* Уменьшаем внутренние отступы */
+        word-wrap: break-word; /* Перенос длинного текста */
+        word-break: break-word; /* Перенос длинных слов */
+        overflow-wrap: break-word; /* Альтернатива для переносов */
+        text-align: left;
+        vertical-align: top; /* Выравниваем содержимое сверху */
+        white-space: normal; /* Разрешаем перенос строк */
+    }
+
+    .table-details th {
+        width: 43%; /* Устанавливаем ширину заголовков */
+        font-weight: bold; /* Жирный текст для заголовков */
+        color: #18664c; /* Цвет заголовков */
+    }
+
+    .table-details td {
+        width: 57%; /* Устанавливаем ширину данных */
+        background-color: #f9f9f9; /* Фоновый цвет для данных */
+    }
+
+    .user-greeting {
+        font-size: 1rem; /* Уменьшаем размер шрифта */
+        margin-bottom: 10px; /* Уменьшаем отступ */
+        text-align: center; /* Выравнивание текста по центру сохраняем */
+    }
+
+    .user-greeting a {
+        font-size: 1rem; /* Уменьшаем размер ссылки */
+    }
 }
